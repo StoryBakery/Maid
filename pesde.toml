@@ -21,10 +21,14 @@ build_files = ["src"]
 default = "https://github.com/pesde-pkg/index"
 
 [dependencies]
-Signal = { repo = "https://githumb.com/StoryBakery/Maid", rev = "main" }
+Signal = { repo = "https://github.com/StoryBakery/Signal", rev = "main" }
 
 [scripts]
 roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
+sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
+
+[dev_dependencies]
+scripts = { name = "pesde/scripts_rojo", version = "^0.2.0", target = "lune" }
 
 [engines]
 pesde = "^0.7.0"
