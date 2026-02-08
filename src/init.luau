@@ -43,13 +43,11 @@
 	```
 ]=]
 
-local Signal = require("../roblox_packages/Signal")
-
-local taskSpawn = task.spawn
+local Signal = require("./roblox_packages/Signal")
 
 local Maid = {}
 Maid.__index = Maid
-Maid.__type = "Bam/Packages/Maid"
+Maid.__type = "Maid"
 
 -- Defines behaviors for different types of tasks that can be managed by Maid.
 local behaviorsByType = {
@@ -84,12 +82,12 @@ local behaviorsByType = {
 	["function"] = {
 		Name = "function",
 		OnDestroy = function(maid, task)
-			taskSpawn(task)
+			task.spawn(task)
 		end,
 	},
 }
 
-local behaviorsByTableType = require("./behaviorsByTableType")
+local behaviorsByTableType = require("@self/behaviorsByTableType")
 
 type TableTypeBehavior = behaviorsByTableType.TableTypeBehavior
 
@@ -109,8 +107,6 @@ local function findTableTypeOfTask(task: any)
 end
 
 --#region Constructors
-
-
 
 export type Maid = setmetatable<{
 	IsDestroyed: boolean,
