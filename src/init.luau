@@ -4,15 +4,15 @@
 	메이드 클래스입니다.
 	
 	예시 코드:
-	```
-	local Maid = require("../roblox_packages/Maid")
+	```lua
+	local Maid = require("@game/ReplicatedStorage/Packages/Maid")
 	
 	local part = workspace.Part
 	local maid = Maid.new()
 	
 	maid:GiveTask(part:GetPropertyChangedSignal("Name"):Connect(function()
 		print("Part Name Changed!")
-	end)
+	end))
 	
 	local sizeChangedConnection = part:GetPropertyChangedSignal("Size"):Connect(function()
 		print("Part Size Changed!")
@@ -106,8 +106,6 @@ local function findTableTypeOfTask(task: any)
 	return nil
 end
 
---#region Constructors
-
 export type Maid = setmetatable<{
 	IsDestroyed: boolean,
 	Destroying: Signal.Signal<>,
@@ -145,9 +143,6 @@ function Maid.new(): Maid
 
 	return self
 end
-
---#endregion Constructors
---#region Methods
 
 local function getTaskBehaviorAndtype(task: any): (any, string)
 	local taskType = typeof(task)
@@ -257,13 +252,14 @@ function Maid:Destroy()
 
 	self:DoCleaning(true) -- 완전히 제거되는 것임으로 부모 메이드로부터도 삭제합니다
 
-	table.freeze(self)
-	table.freeze(self.Tasks)
+	table.freeze(self :: any)
+	table.freeze(self.Tasks :: any)
 end
 
 --[=[
 	등록된 작업을 즉시 정리합니다.
-	@param removesFromParentMaids? boolean -- true 이면 상위 Maid 의 참조도 제거합니다.
+    
+	@param removesFromParentMaids -- true 이면 상위 Maid 의 참조도 제거합니다.
 ]=]
 function Maid:DoCleaning(removesFromParentMaids: boolean?)
 	if self.IsDestroyed then
@@ -287,6 +283,5 @@ function Maid:DoCleaning(removesFromParentMaids: boolean?)
 		table.clear(self.ParentMaids)
 	end
 end
---#endregion Methods
 
 return Maid

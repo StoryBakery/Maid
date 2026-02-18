@@ -1,5 +1,5 @@
 name = "storybakery/maid"
-version = "0.1.1"
+version = "0.1.0"
 license = "MIT"
 includes = [
     "pesde.toml",
@@ -21,7 +21,7 @@ build_files = ["src"]
 default = "https://github.com/pesde-pkg/index"
 
 [dependencies]
-Signal = { repo = "https://github.com/StoryBakery/Signal", rev = "main" }
+Signal = { repo = "https://github.com/StoryBakery/Signal", rev = "v0.1.0" }
 
 [scripts]
 roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
